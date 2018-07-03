@@ -6,7 +6,7 @@ body {
 	margin:0;
 	color:white;
 	overflow-x: hidden;
-	background-color: rgba(0,0,0,0.04);
+	background-color: rgba(0,0,0,0.08);
 }
 a{
 	cursor: pointer;
