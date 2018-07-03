@@ -1,0 +1,38 @@
+html{
+	font-size: 14px;
+}
+body {
+	font-size: 1em;
+	margin:0;
+	color:white;
+	overflow-x: hidden;
+	background-color: rgba(0,0,0,0.04);
+}
+a{
+	cursor: pointer;
+}
+.sub-page-head {
+	color: orangered;
+}
+h1,h2,h3,h4,h4,h6,p {
+	padding:0px;
+	margin:0px;
+}
+.no-pad {
+	padding:0px;
+}
+.no-mar {
+	margin:0px;
+}
+/*form options*/
+input{
+  border:none;
+  border-bottom: 1px solid grey;
+}
+textarea{
+  border: 1px solid grey;
+}
+input:focus ,textarea:focus{
+  border-color: #BF1363;
+  box-shadow: none;
+}

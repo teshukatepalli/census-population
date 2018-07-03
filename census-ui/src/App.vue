@@ -1,7 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <!-- <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 brand">
+          <h4>Census</h4>
+        </div>
+      </div>
+    </div>
+    <div class="contant">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="sidebar">
+            <p>hello sidebar</p>
+          </div>
+        </div>
+        <div class="col-md-10"> -->
+          <router-view/>
+       <!--  </div>
+      </div>
+    </div> -->
   </div>
 </template>
 
@@ -10,14 +27,5 @@ export default {
   name: 'App'
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
