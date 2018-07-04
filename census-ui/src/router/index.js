@@ -5,6 +5,7 @@ import dashboard from '@/components/dashboard'
 import county from '@/components/county'
 import editCounty from '@/components/editCounty'
 import viewCounty from '@/components/viewCounty'
+import addCounty from '@/components/addCounty'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/editCounty',
       name: 'editCounty',
       component: editCounty
+    },
+    {
+      path: '/addCounty',
+      name: 'addCounty',
+      component: addCounty
     }
   ]
 })

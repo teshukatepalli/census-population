@@ -3,6 +3,9 @@
     <div class="welcome-board text-center">
       <h4>Counties list</h4>
     </div>
+    <div>
+      <button type="button" class="btn-primary no-pad" v-on:click="$router.push('/addCounty')">add new</button>
+    </div>
     <div class="tiles">
       <div class="container-fluid">
         <div class="row">
