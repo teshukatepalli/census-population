@@ -6,6 +6,8 @@ use App\population;
 use App\population_age;
 use App\population_gender;
 use App\population_ror;
+use App\population_hh;
+use App\population_poverty;
 use Illuminate\Http\Request;
 
 class PopulationController extends Controller
@@ -19,7 +21,7 @@ class PopulationController extends Controller
     {
         return response()->json([
             'success' => true,
-            'populations' => population::all()
+            'counties' => population::all()
         ]);
     }
 
@@ -41,7 +43,7 @@ class PopulationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population::create($request->all());
     }
 
     /**
@@ -57,7 +59,7 @@ class PopulationController extends Controller
         $population->rors = population_ror::where('county_id', '=', $population->id)->get();
         return response()->json([
             'success' => true,
-            'population' => $population
+            'county' => $population
         ]);
     }
 
@@ -72,6 +74,7 @@ class PopulationController extends Controller
         //
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -81,7 +84,15 @@ class PopulationController extends Controller
      */
     public function update(Request $request, population $population)
     {
-        //
+        population::where("id", "=", $population->id)
+            ->update([
+                'Population' => $request->get('Population'),
+                'Population_MOE' => $request->get('Population_MOE')
+            ]);
+        return response()->json([
+            'success' => true,
+            "message" => 'Population Updated Successfully'
+        ]);
     }
 
     /**
@@ -92,6 +103,10 @@ class PopulationController extends Controller
      */
     public function destroy(population $population)
     {
-        //
+        $population->delete();
+        return response()->json([
+            'success' => true,
+            'message' => 'County Deleted Successfully'
+        ]);
     }
 }

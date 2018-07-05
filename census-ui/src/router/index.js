@@ -1,36 +1,47 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import dashboard from '@/components/dashboard'
-import county from '@/components/county'
-import editCounty from '@/components/editCounty'
-import viewCounty from '@/components/viewCounty'
+import Login from '@/pages/login/login'
+import dashboard from '@/pages/dashboard/dashboard'
+import county from '@/pages/county/county'
+import editCounty from '@/pages/county/editCounty'
+import viewCounty from '@/pages/county/viewCounty'
 import addCounty from '@/components/addCounty'
 
 Vue.use(Router)
+
+function requireAuth (to, from, next) {
+  if (localStorage.getItem('Token')) {
+    next()  // we are authorized, continue on to the requested route
+  } else {
+    next('/login') // they are not authorized, so redirect to login
+  }
+}
 
 export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
-      path: '/dashboard',
+      path: '/',
       name: 'dashboard',
-      component: dashboard
+      component: dashboard,
+      beforeEnter: requireAuth
     },
     {
       path: '/county',
       name: 'county',
-      component: county
+      component: county,
+      beforeEnter: requireAuth
     },
     {
-      path: '/viewCounty',
+      path: '/county/:id',
       name: 'viewCounty',
-      component: viewCounty
+      component: viewCounty,
+      props: true
     },
     {
       path: '/editCounty',

@@ -14,7 +14,10 @@ class PopulationGenderController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'gender' => population_gender::all()
+        ]);
     }
 
     /**

@@ -14,7 +14,10 @@ class PopulationRorController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'races' => population_ror::all()
+        ]);
     }
 
     /**

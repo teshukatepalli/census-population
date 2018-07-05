@@ -14,7 +14,10 @@ class PopulationHhController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'household' => population_hh::all()
+        ]);
     }
 
     /**

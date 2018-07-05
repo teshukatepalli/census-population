@@ -23,6 +23,8 @@ class CreatePopulationRorsTable extends Migration
             $table->integer('Uninsured_MOE');
             $table->double('Uninsured_Pct');
             $table->double('Uninsured_Pct_MOE');
+            $table->timestamps();
+            
         });
     }
 

@@ -1,31 +1,22 @@
 <template>
-  <div id="app">
-    <div>
-      <div class="contant">
-        <div class="row ">
-          <div class="col-md-2 sticky no-pr">
-            <div class="sidebar">
-              <div class="col-md-12 text-center">
-                <h4 class="brand">Census</h4>
-                <hr>
-                <div class="username flex-s">
-                  <img src="http://via.placeholder.com/30x30" alt="user-img" class="img-responsive ">
-                  <h4>Teshu</h4>
-                </div>
-                <hr>
-                <div class="options">
-                  <ul class="text-left">
-                    <li><router-link to="dashboard">Dashboard</router-link></li>
-                    <li><router-link to="county">Counties</router-link></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+  <div id="app" style="background-color: white;">
+      <nav class="navbar navbar-inverse" style="border-radius: 0px;position: sticky;top:0px;z-index:100;" v-if="loginStatus">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <router-link class="navbar-brand" to="/">Census</router-link>
           </div>
-          <div class="col-md-10 no-pl">
-            <div>
-              <router-view/>
-            </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><router-link to="/">Dashboard</router-link></li>
+            <li><router-link to="/county">Counties</router-link></li>
+            <li><router-link to="/profile">Profile</router-link></li>
+            <li><a v-on:click="logout();$router.push('/login')">Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12" style="min-height: 90vh;">
+            <router-view @change="changeStatus"></router-view>
           </div>
         </div>
       </div>
@@ -35,7 +26,29 @@
 
 <script>
 export default {
-  name: 'App'
+  data () {
+    return {
+      loginStatus: false
+    }
+  },
+  created () {
+    this.checkLoginStatus()
+  },
+  methods: {
+    checkLoginStatus () {
+      if (localStorage.getItem('Token')) {
+        this.loginStatus = true
+      }
+    },
+    changeStatus (value) {
+      console.log(value)
+    },
+    logout () {
+      localStorage.removeItem('Token')
+      localStorage.removeItem('profile')
+      this.loginStatus = false
+    }
+  }
 }
 </script>
 <style>
@@ -95,12 +108,9 @@ export default {
   border-radius:5px;
 }
 a {
-  color:white;
   text-decoration:none;
-  color:white;
 }
 a:hover {
-  color:white;
   text-decoration: none;
 }
 .heading {

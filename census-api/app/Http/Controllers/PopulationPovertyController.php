@@ -14,7 +14,10 @@ class PopulationPovertyController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'poverty' => population_poverty::all()
+        ]);
     }
 
     /**

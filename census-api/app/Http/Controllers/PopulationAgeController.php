@@ -14,7 +14,10 @@ class PopulationAgeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'success' => true,
+            'ages' => population_age::all()
+        ]);
     }
 
     /**
