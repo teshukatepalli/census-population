@@ -7,7 +7,11 @@
       <div class="col-md-6 text-right">
       </div>
     </div>
-    <!-- countieslist -->
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h4>Population</h4>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12" style="width: 100%;overflow-x: auto;">
         <br>
@@ -46,17 +50,64 @@
           </tbody>
         </table>
       </div>
-          {{ageList}}
+          <!-- {{ageList}} -->
+    </div>
+    <div class="row">
+      <div class="col-md-12 p-1 text-center">
+        <h4>Population Based on Ages</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12" style="width: 100%;overflow-x: auto;">
+        <br>
+        <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
+          <thead>
+            <tr>
+              <th style="min-width: 200px;"></th>
+              <th v-for="item in countiesList" v-if="countiesList.length>0">{{item.County}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Insured</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Population}}</td>
+            </tr>
+            <tr>
+              <td><b>Uninsured</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Uninsured}}</td>
+            </tr>
+            <tr >
+              <td><b>Insured MOE</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Population_MOE}}</td>
+            </tr>
+            <tr>
+              <td><b>Uninsured MOE</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Uninsured_MOE}}</td>
+            </tr>
+            <!-- <tr>
+              <td><b>Uninsured PCT</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Uninsured_Pct}}%</td>
+            </tr> -->
+            <!-- <tr>
+              <td><b>Uninsured PCT MOE</b></td>
+              <td v-for="item in countiesList" v-if="countiesList.length>0">{{item.Uninsured_Pct_MOE}}%</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+      <div v-for="items in ageList.length">
+          {{ageList[items]}}
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  data () {
+  data () { 
     return {
       msg: 'hello',
       countiesList: [],
-      ageList: {}
+      ageList: []
     }
   },
   created() {
@@ -73,11 +124,14 @@ export default {
     getageList() {
       this.$axios.get('http://localhost:8000/api/population_age')
       .then(response => {
-        this.ageList = response.data
+        this.ageList = response.data.ages
       })
     }
   }
 }
 </script>
 <style scoped>
+.p-1 {
+  padding:1em;
+}
 </style>

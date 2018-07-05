@@ -34,7 +34,7 @@
               <td>{{item.Uninsured_MOE}}</td>
               <td>{{item.Uninsured_Pct}}%</td>
               <td>{{item.Uninsured_Pct_MOE}}%</td>
-              <td><a v-on:click="$router.push('/county/' + item.id)" style="text-decoration: underline;">View Details</a></td>
+              <td><button class="btn btn-primary" v-on:click="$router.push('/county/' + item.id)">View Details</button> <button class="btn btn-danger" v-on:click="deleteCounty(item.id)">Delete County</button></td>
             </tr>
             <tr v-if="countiesList.length==0">
               <td class="text-center" colspan="8">
@@ -64,11 +64,19 @@ export default {
     this.getcountyList()
   },
   methods: {
-    getcountyList() {
+    getcountyList () {
       this.$axios.get('http://localhost:8000/api/population')
       .then(response => {
         this.countiesList = response.data.counties
       })
+    },
+    deleteCounty (id) {
+      this.$axios.delete('http://localhost:8000/api/population/'+ id)
+      .then(response => {
+        this.msg = response.data.message
+      alert(this.msg)
+      })
+      this.getcountyList()
     }
   }
 }

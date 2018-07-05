@@ -57,6 +57,9 @@ class PopulationController extends Controller
         $population->ages = population_age::where('county_id', '=', $population->id)->get();
         $population->genders = population_gender::where('county_id', '=', $population->id)->get();
         $population->rors = population_ror::where('county_id', '=', $population->id)->get();
+        $population->rors = population_ror::where('county_id', '=', $population->id)->get();
+        $population->household = population_hh::where('county_id', '=', $population->id)->get();
+        $population->poverty = population_poverty::where('county_id', '=', $population->id)->get();
         return response()->json([
             'success' => true,
             'county' => $population
