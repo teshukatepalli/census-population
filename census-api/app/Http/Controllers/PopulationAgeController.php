@@ -83,6 +83,7 @@ class PopulationAgeController extends Controller
      */
     public function destroy(population_age $population_age)
     {
-        //
+        
     }
+
 }

@@ -7,6 +7,7 @@ use App\population_age;
 use App\population_gender;
 use App\population_ror;
 use App\population_hh;
+use App\User;
 use App\population_poverty;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,7 @@ class PopulationController extends Controller
     public function show(population $population)
     {
         $population->ages = population_age::where('county_id', '=', $population->id)->get();
+        $population->user = User::where('county_id', '=', $population->id)->get()->first();
         $population->genders = population_gender::where('county_id', '=', $population->id)->get();
         $population->rors = population_ror::where('county_id', '=', $population->id)->get();
         $population->rors = population_ror::where('county_id', '=', $population->id)->get();
@@ -112,4 +114,25 @@ class PopulationController extends Controller
             'message' => 'County Deleted Successfully'
         ]);
     }
+
+    public function dashboard () {
+
+        $max = array(
+            'Population' => population::max('Population'),
+            'Population_MOE' => population::max('Population_MOE'),
+            'Uninsured' => population::max('Uninsured'),
+            'Uninsured_MOE' => population::max('Uninsured_MOE'),
+            'Uninsured_Pct' => population::max('Uninsured_Pct'),
+            'Uninsured_Pct_MOE' => population::max('Uninsured_Pct_MOE')
+            );
+        $data = array(
+            'population_max' => $max,
+            'population' => population::all()
+        );
+        return response()->json([
+            'success' => true,
+            'data' => $data
+        ]);
+    }
+
 }

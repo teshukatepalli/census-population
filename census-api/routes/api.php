@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('dashboard', 'PopulationController@dashboard');
 Route::ApiResource('population', 'PopulationController');
 //population_age
 Route::ApiResource('population_age', 'PopulationAgeController');

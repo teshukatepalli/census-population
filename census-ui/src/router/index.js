@@ -6,6 +6,7 @@ import county from '@/pages/county/county'
 import editCounty from '@/pages/county/editCounty'
 import viewCounty from '@/pages/county/viewCounty'
 import addCounty from '@/components/addCounty'
+import profile from '@/pages/profile'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/addCounty',
       name: 'addCounty',
       component: addCounty
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: profile
     }
   ]
 })

@@ -14,45 +14,85 @@
       <div class="row">
         <div class="col-md-6">
           <h4>Basic Population</h4>
+          <button class="btn btn-primary" style="float: right;" v-on:click="getActive('population')">Edit</button>
         </div>
         <div class="col-md-6 text-right">
-          <button class="btn btn-primary" v-on:click="getActive('population')">Edit</button>
         </div>
       </div>
-      <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
-        <thead>
-          <tr>
-            <th>Basic Population</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody class="half">
-          <tr>
-            <td><b>Population</b></td>
-            <td>{{county.Population}}</td>
-          </tr>
-          <tr >
-            <td><b>Population MOE</b></td>
-            <td>{{county.Population_MOE}}</td>
-          </tr>
-          <tr>
-            <td><b>Uninsured</b></td>
-            <td>{{county.Uninsured}}</td>
-          </tr>
-          <tr>
-            <td><b>Uninsured MOE</b></td>
-            <td>{{county.Uninsured_MOE}}</td>
-          </tr>
-          <tr>
-            <td><b>Uninsured PCT</b></td>
-            <td>{{county.Uninsured_Pct}}%</td>
-          </tr>
-          <tr>
-            <td><b>Uninsured PCT MOE</b></td>
-            <td>{{county.Uninsured_Pct_MOE}}%</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
+            <thead>
+              <tr>
+                <th>Basic Population</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody class="half">
+              <tr>
+                <td><b>Population</b></td>
+                <td>{{county.Population}}</td>
+              </tr>
+              <tr >
+                <td><b>Population MOE</b></td>
+                <td>{{county.Population_MOE}}</td>
+              </tr>
+              <tr>
+                <td><b>Uninsured</b></td>
+                <td>{{county.Uninsured}}</td>
+              </tr>
+              <tr>
+                <td><b>Uninsured MOE</b></td>
+                <td>{{county.Uninsured_MOE}}</td>
+              </tr>
+              <tr>
+                <td><b>Uninsured PCT</b></td>
+                <td>{{county.Uninsured_Pct}}%</td>
+              </tr>
+              <tr>
+                <td><b>Uninsured PCT MOE</b></td>
+                <td>{{county.Uninsured_Pct_MOE}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <table class="table table-bordered" style="width: 100%;overflow-x: auto;" v-if="county && county.user">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody class="half">
+              <tr>
+                <td><b>Name</b></td>
+                <td>{{county.user.name}}</td>
+              </tr>
+              <tr >
+                <td><b>Email</b></td>
+                <td>{{county.user.email}}</td>
+              </tr>
+              <tr>
+                <td><b>User Type</b></td>
+                <td>{{county.user.user_type}}</td>
+              </tr>
+              <tr>
+                <td><b>Uninsured MOE</b></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><b>Uninsured PCT</b></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><b>Uninsured PCT MOE</b></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <hr>
     <div class="col-md-12" style="width: 100%;overflow-x: auto;">

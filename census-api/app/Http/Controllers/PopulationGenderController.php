@@ -85,4 +85,12 @@ class PopulationGenderController extends Controller
     {
         //
     }
+
+    public function dashboard () {
+        $population->male = population_age::where('gender', '=', $population->gender)->get();
+        return response()->json([
+            'success' => true,
+            'county' => $population
+        ]);
+    }
 }

@@ -18,7 +18,7 @@
               <th>County Name</th>
               <th>Population</th>
               <th>Population_MOE</th>
-              <th>Uninsured</th>
+              <th>Uninsured</th>  
               <th>Uninsured_MOE</th>
               <th>Uninsured_Pct</th>
               <th>Uninsured_Pct_MOE</th>
@@ -26,7 +26,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in countiesList" v-if="countiesList.length>0">
+            <tr  v-for="item in pageinList" v-if="countiesList.length>0">
               <td>{{item.County}}</td>
               <td>{{item.Population}}</td>
               <td>{{item.Population_MOE}}</td>
@@ -45,19 +45,49 @@
         </table>
       </div>
     </div>
-    <!-- <county-details :county-details="countyDetails"></county-details> -->
+    <div class="row text-center">
+      <div class="col-md-2 col-md-offset-1">
+        <button class="btn btn-primary" @click.prevent="prevPage">Previous Page</button>
+      </div>
+      <div class="col-md-2 col-xs-6 text-center mb-top-1">
+        <p><span>Current Page: <b>{{paginData.pageNum}}/{{paginData.pages}}</b></span></p>
+      </div>
+      <div class="col-md-2">
+        <p class="text-center"><span>Total: <b>{{paginData.total}}</b></span></p>
+      </div>
+      <div class="col-md-2">
+        Per Page: <select  v-model="paginData.perPage" v-on:change="createPagin(countiesList)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </select>
+      </div>
+      {{pageinList}}
+      {{paginData}}
+      <div class="col-md-2">
+        <button class="btn btn-primary" @click.prevent="nextPage">Next Page</button>
+      </div>
+    </div>
   </div>
+</div>
 </template>
 <script>
   // import countyDetails from './countyDetails.vue'
 export default {
-  // components: {
-  //   countyDetails,
-  // },
   data () {
     return {
       msg: 'hello',
-      countiesList: []
+      countiesList: [],
+      paginData: {
+        perPage: 5,
+        total: 0,
+        pages: 0,
+        pageNum: 1
+      },
+      pageinList: [],
+      len: 0
     }
   },
   created() {
@@ -68,6 +98,7 @@ export default {
       this.$axios.get('http://localhost:8000/api/population')
       .then(response => {
         this.countiesList = response.data.counties
+        this.createPagin(this.countiesList)
       })
     },
     deleteCounty (id) {
@@ -77,7 +108,57 @@ export default {
       alert(this.msg)
       })
       this.getcountyList()
-    }
+    },
+    callCreatePagin (dalaList) {
+
+    },
+    createPagin (datalist) {
+      let len = datalist.length
+      this.paginData.total = len
+      this.paginData.pageNum = 1
+      if (len < this.paginData.perPage) {
+        this.paginData.pages = 1
+        this.paginate(datalist)
+      } else {
+        if (len % this.paginData.perPage > 0) {
+          this.paginData.pages = parseInt(len / this.paginData.perPage) + 1
+          // this.paginData.pages = len / this.paginData.perPage
+        } else {
+          this.paginData.pages = len / this.paginData.perPage
+        }
+        if (this.paginData.total > 0) {
+          this.paginate(datalist)
+        }
+      }
+      
+    },
+    paginate (datalist) {
+      let len = datalist.length
+      let start = (this.paginData.pageNum - 1) * this.paginData.perPage
+      let end = this.paginData.pageNum * this.paginData.perPage
+      this.pageinList = []
+      if (end < len) {
+        for (var i = start; i < end; i++) {
+          this.pageinList.push(datalist[i])
+        }
+      } else {
+        for (var j = start; j < this.paginData.total; j++) {
+          this.pageinList.push(datalist[j])
+        }
+      }
+    },
+    nextPage () {
+      if (this.paginData.pageNum < this.paginData.pages) {
+        this.paginData.pageNum += 1
+        this.paginate(this.countiesList)
+      }
+    },
+    prevPage () {
+      if (this.paginData.pageNum > 1) {
+        this.paginData.pageNum -= 1
+        this.paginate(this.countiesList)
+      }
+    },
   }
 }
 </script>
