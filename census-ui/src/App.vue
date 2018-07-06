@@ -3,7 +3,7 @@
       <nav class="navbar navbar-inverse" style="border-radius: 0px;position: sticky;top:0px;z-index:100;" v-if="loginStatus">
         <div class="container-fluid">
           <div class="navbar-header">
-            <router-link class="navbar-brand" to="/">Census</router-link>
+            <router-link class="navbar-brand" to="/"><img src="./assets/census.png" height="50px" alt=""></router-link>
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li><router-link to="/">Dashboard</router-link></li>
@@ -52,7 +52,9 @@ export default {
 }
 </script>
 <style>
-<style>
+.navbar {
+  border-radius:0px 0px 3px black;
+}
 .white {
   color:white;
 }
@@ -76,6 +78,9 @@ export default {
   font-weight: 600;
   color:#FFFFFF;
   letter-spacing: 1px;
+}
+.navbar-brand {
+  padding:0px;
 }
 .sidebar {
   height:100vh;
@@ -130,5 +135,14 @@ a:hover {
 .sticky {
   position:sticky;
   top:0px;
+}
+.navbar-nav li a{
+  color:white!important;
+  font-weight: 500;
+  border-bottom:3px solid black;
+}
+.navbar-nav li a:hover {
+  color:#777!important;
+  border-bottom:3px solid white!important;
 }
 </style>

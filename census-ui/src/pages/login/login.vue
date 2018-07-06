@@ -1,6 +1,9 @@
 <template>
   <div class="content">
   	<div class="container" style="margin-top: 20vh;">
+      <div class="text-center">
+        <img src="../census.png" height="150px"alt="">
+      </div>
   	    <div class="row">
   	    	<div class="col-md-4 col-md-offset-4">
   	    		<div class="input-form-group">
@@ -12,7 +15,9 @@
   		    		<input type="password" class="form-control" v-model="payload.password" placeholder="Enter Password" name="psw" required>
 				</div>
         <br>
-  	    		<button class="btn btn-primary" type="submit" v-on:click="login">Login</button>
+          <div class="text-center">
+  	    		<button class="btn btn-danger" type="submit" v-on:click="login">Login</button>
+          </div>
   	    	</div>
   	    </div>
   	  </div>
