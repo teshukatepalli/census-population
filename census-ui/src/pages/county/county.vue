@@ -5,7 +5,7 @@
         <h3>Counties</h3>
       </div>
       <div class="col-md-6 text-right">
-        <button class="btn btn-primary">+ New County</button>
+        <!-- <button class="btn btn-primary" v-on:click="$router.push('/newCounty')">+ New County</button> -->
       </div>
     </div>
     <!-- countieslist -->
@@ -64,8 +64,6 @@
           <option value="100">100</option>
         </select>
       </div>
-      {{pageinList}}
-      {{paginData}}
       <div class="col-md-2">
         <button class="btn btn-primary" @click.prevent="nextPage">Next Page</button>
       </div>
@@ -158,7 +156,7 @@ export default {
         this.paginData.pageNum -= 1
         this.paginate(this.countiesList)
       }
-    },
+    }
   }
 }
 </script>
