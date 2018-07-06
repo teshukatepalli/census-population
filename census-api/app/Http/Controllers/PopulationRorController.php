@@ -72,7 +72,19 @@ class PopulationRorController extends Controller
      */
     public function update(Request $request, population_ror $population_ror)
     {
-        //
+        population_ror::where("id", "=", $population_ror->county_id)
+            ->update([
+                'Population' => $request->get('Population'),
+                'Population_MOE' => $request->get('Population_MOE'),
+                'Uninsured' => $request->get('Uninsured'),
+                'Uninsured_MOE' => $request->get('Uninsured_MOE'),
+                'Uninsured_Pct' => $request->get('Uninsured_Pct'),
+                'Uninsured_Pct_MOE' => $request->get('Uninsured_Pct_MOE')
+            ]);
+        return response()->json([
+            'success' => true,
+            "message" => 'Population Updated Successfully'
+        ]);
     }
 
     /**

@@ -11,7 +11,8 @@
 	  	    		<label for="psw"><b>Password</b></label>
   		    		<input type="password" class="form-control" v-model="payload.password" placeholder="Enter Password" name="psw" required>
 				</div>
-  	    		<button type="submit" v-on:click="login">Login</button>
+        <br>
+  	    		<button class="btn btn-primary" type="submit" v-on:click="login">Login</button>
   	    	</div>
   	    </div>
   	  </div>

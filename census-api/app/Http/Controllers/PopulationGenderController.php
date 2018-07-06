@@ -72,7 +72,19 @@ class PopulationGenderController extends Controller
      */
     public function update(Request $request, population_gender $population_gender)
     {
-        //
+        population_gender::where("id", "=", $population_gender->county_id)
+            ->update([
+                'Population' => $request->get('Population'),
+                'Population_MOE' => $request->get('Population_MOE'),
+                'Uninsured' => $request->get('Uninsured'),
+                'Uninsured_MOE' => $request->get('Uninsured_MOE'),
+                'Uninsured_Pct' => $request->get('Uninsured_Pct'),
+                'Uninsured_Pct_MOE' => $request->get('Uninsured_Pct_MOE')
+            ]);
+        return response()->json([
+            'success' => true,
+            "message" => 'Population Updated Successfully'
+        ]);
     }
 
     /**

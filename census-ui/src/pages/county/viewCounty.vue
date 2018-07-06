@@ -78,18 +78,6 @@
                   <td><b>User Type</b></td>
                   <td>{{county.user.user_type}}</td>
                 </tr>
-                <tr>
-                  <td><b>Uninsured MOE</b></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td><b>Uninsured PCT</b></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td><b>Uninsured PCT MOE</b></td>
-                  <td></td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -558,6 +546,7 @@
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('poverty')">Done</button>
     </div>
+    {{county}}
   </div>
 </template>
 <script>
@@ -588,6 +577,14 @@ export default {
       .then(res => {
         if (res.data.success === true) {
           this.county = res.data.county
+        }
+      })
+    },
+    putCountyDetails () {
+      this.$axios.put('http://localhost:8000/api/population/' + this.id,)
+      .then(res => {
+        if (res.data.success === true) {
+          this.msg = res.data
         }
       })
     },

@@ -72,9 +72,20 @@ class PopulationAgeController extends Controller
      */
     public function update(Request $request, population_age $population_age)
     {
-        //
+        population_age::where("id", "=", $population_age->county_id)
+            ->update([
+                'Population' => $request->get('Population'),
+                'Population_MOE' => $request->get('Population_MOE'),
+                'Uninsured' => $request->get('Uninsured'),
+                'Uninsured_MOE' => $request->get('Uninsured_MOE'),
+                'Uninsured_Pct' => $request->get('Uninsured_Pct'),
+                'Uninsured_Pct_MOE' => $request->get('Uninsured_Pct_MOE')
+            ]);
+        return response()->json([
+            'success' => true,
+            "message" => 'Age Updated Successfully'
+        ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
