@@ -39,3 +39,8 @@ Route::ApiResource('population_race', 'PopulationRorController');
 
 // login
 Route::post('login', 'authenticationController@login');
+
+// update ages
+Route::post('updateall', 'CustomController@updateAll');
+// update genders
+// Route::post('updategenders', 'CustomController@updateGenders');

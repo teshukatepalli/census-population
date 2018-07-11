@@ -324,7 +324,8 @@
         </div>
       </div>
     </div>
-    <div v-if="population" class="model">
+    <!-- {{populatonCounty}} -->
+    <div v-if="model_role==='population'" class="model">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
@@ -335,218 +336,217 @@
         <tbody class="half">
           <tr>
             <td><b>Population</b></td>
-            <td><input type="text" v-model="county.Population"></td>
+            <td><input type="text" v-model="payload.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td><input type="text" v-model="county.Population_MOE"></td>
+            <td><input type="text" v-model="payload.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td><input type="text" v-model="county.Uninsured"></td>
+            <td><input type="text" v-model="payload.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td><input type="text" v-model="county.Uninsured_MOE"></td>
+            <td><input type="text" v-model="payload.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td><input type="text" v-model="county.Uninsured_Pct">%</td>
+            <td><input type="text" v-model="payload.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td><input type="text" v-model="county.Uninsured_Pct_MOE">%</td>
+            <td><input type="text" v-model="payload.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('population')">Done</button>
     </div>
-    <div v-if="age" class="model">
+    <div v-if="model_role==='age'" class="model">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
             <th>Age</th>
-            <th v-for="item in county.ages">{{item.age_from}} to {{item.age_to}}</th>
+            <th v-for="item in payload.ages">{{item.age_from}} to {{item.age_to}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Population</td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Population"></td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Population_MOE"></td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Uninsured"></td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Uninsured_MOE"></td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Uninsured_Pct">%</td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td v-for="item in county.ages"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
+            <td v-for="item in payload.ages"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('age')">Done</button>
     </div>
-    <div v-if="gender" class="model">
+    <div v-if="model_role==='gender'" class="model">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
             <th>gender</th>
-            <th v-for="item in county.genders">{{item.gender}}</th>
+            <th v-for="item in payload.genders">{{item.gender}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Population</td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Population"></td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Population_MOE"></td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Uninsured"></td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Uninsured_MOE"></td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Uninsured_Pct">%</td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td v-for="item in county.genders"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
+            <td v-for="item in payload.genders"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('gender')">Done</button>
     </div>
-    <div v-if="races" class=" raceBlock model ">
+    <div v-if="model_role==='races'" class=" raceBlock model ">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
             <th>Races</th>
-            <th v-for="item in county.rors">{{item.ror_label}}</th>
+            <th v-for="item in payload.rors">{{item.ror_label}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Population</td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Population"></td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Population_MOE"></td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Uninsured"></td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Uninsured_MOE"></td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Uninsured_Pct">%</td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td v-for="item in county.rors"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
+            <td v-for="item in payload.rors"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('races')">Done</button>
     </div>
-    <div v-if="roi" class="model">
+    <div v-if="model_role==='roi'" class="model">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
             <th>Ratio of income</th>
-            <th v-for="item in county.household">{{item.income_from}} to {{item.income_to}}</th>
+            <th v-for="item in payload.household">{{item.income_from}} to {{item.income_to}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Population</td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Population"></td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Population_MOE"></td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Uninsured"></td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Uninsured_MOE"></td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Uninsured_Pct">%</td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td v-for="item in county.household"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
+            <td v-for="item in payload.household"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('roi')">Done</button>
     </div>
-    <div v-if="poverty" class="model">
+    <div v-if="model_role==='poverty'" class="model">
       <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
         <thead>
           <tr>
             <th>Poverty Line</th>
-            <th v-for="item in county.poverty">{{item.line_from}} to {{item.line_to}}</th>
+            <th v-for="item in payload.poverty">{{item.line_from}} to {{item.line_to}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Population</td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Population"></td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Population_MOE"></td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Uninsured"></td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Uninsured_MOE"></td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Uninsured_Pct">%</td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td v-for="item in county.poverty"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
+            <td v-for="item in payload.poverty"><input type="text" v-model="item.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
       <button class="btn btn-primary" v-on:click="getInactive('poverty')">Done</button>
     </div>
-    {{county}}
   </div>
 </template>
 <script>
@@ -561,7 +561,9 @@ export default {
       roi: 0,
       gender: 0,
       poverty: 0,
-      active: 1
+      active: 1,
+      payload: {},
+      model_role: ''
     }
   },
   created () {
@@ -580,7 +582,7 @@ export default {
         }
       })
     },
-    putCountyDetails () {
+    putCountyDetails (data) {
       this.$axios.put('http://localhost:8000/api/population/' + this.id,)
       .then(res => {
         if (res.data.success === true) {
@@ -589,56 +591,58 @@ export default {
       })
     },
     getActive (data) {
-      if(data === 'population') {
-        this.population = 1
-        this.active = 0
-      }
-      if(data === 'age') {
-        this.age = 1
-        this.active = 0
-      }
-      if(data === 'roi') {
-        this.roi = 1
-        this.active = 0
-      }
-      if(data === 'races') {
-        this.races = 1
-        this.active = 0
-      }
-      if(data === 'poverty') {
-        this.poverty = 1
-        this.active = 0
-      }
-      if(data === 'gender') {
-        this.gender = 1
-        this.active = 0
-      }
+      this.payload = JSON.parse(JSON.stringify(this.county))
+      this.model_role = data
     },
     getInactive(data) {
+      this.model_role = ''
+      var postData = {}
+      postData.update_type = data
       if(data === 'population') {
-        this.population = 0
-        this.active = 1
       }
       if(data === 'age') {
-        this.age = 0
-        this.active = 1
-      }
-      if(data === 'roi') {
-        this.roi = 0
-        this.active = 1
-      }
-      if(data === 'races') {
-        this.races = 0
-        this.active = 1
-      }
-      if(data === 'poverty') {
-        this.poverty = 0
-        this.active = 1
+        postData.data = this.payload.ages
+        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        })
       }
        if(data === 'gender') {
-        this.gender = 0
-        this.active = 1
+        postData.data = this.payload.genders
+        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        })
       }
+      if(data === 'roi') {
+        postData.data = this.payload.household
+        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        })
+      }
+      if(data === 'races') {
+        postData.data = this.payload.rors
+        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        })
+      }
+      if(data === 'poverty') {
+        postData.data = this.payload.poverty
+        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        }) 
+      }
+
+      // update the data
+
     }
   }
 }
