@@ -38,7 +38,7 @@ class PopulationHhController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population_hh::create($request->all());
     }
 
     /**

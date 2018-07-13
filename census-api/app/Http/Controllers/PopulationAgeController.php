@@ -16,6 +16,7 @@ class PopulationAgeController extends Controller
     {
         return response()->json([
             'success' => true,
+            'message' => 'age county added succesfully',
             'ages' => population_age::all()
         ]);
     }
@@ -38,7 +39,7 @@ class PopulationAgeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population_age::create($request->all());
     }
 
     /**

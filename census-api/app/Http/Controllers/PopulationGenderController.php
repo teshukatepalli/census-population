@@ -38,7 +38,7 @@ class PopulationGenderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population_gender::create($request->all());
     }
 
     /**

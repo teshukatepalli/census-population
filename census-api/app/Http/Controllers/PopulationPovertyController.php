@@ -38,7 +38,7 @@ class PopulationPovertyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population_poverty::create($request->all());
     }
 
     /**

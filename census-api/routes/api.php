@@ -42,5 +42,8 @@ Route::post('login', 'authenticationController@login');
 
 // update ages
 Route::post('updateall', 'CustomController@updateAll');
-// update genders
-// Route::post('updategenders', 'CustomController@updateGenders');
+
+// update usera
+Route::post('newuser', 'CustomController@newUser');
+//profile Data 
+Route::get('users', 'CustomController@users');

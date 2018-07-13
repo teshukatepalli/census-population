@@ -1,51 +1,46 @@
 <template>
   <div>
   	<div class="row flex-c">
-  		<div class="col-md-3">
-  			<img src="http://via.placeholder.com/200x200" alt="profile_pic" class="img-circle">
+  		<div class="col-md-3 text-right">
+  			<img src="https://www.w3schools.com/howto/img_avatar.png" height="150px" alt="profile_pic" class="img-circle">
   		</div>
       <div class="col-md-3">
-        <p>Name: Admin</p>
-        <p>Email: Admin@gmail.com</p>
-        <p>Password: 123456</p>
+        <p>Name: {{profile.name}}</p>
+        <p>Email: {{profile.email}}</p>
+        <p v-if="profile.county_id">County Id : {{profile.county_id}}</p>
       </div>
-  	</div>
+    </div>
     <hr>
-    <div class="counties_list text-center">
-      <p>Counties List</p>
-      <div class="row">
-        <div class="col-md-12">
-          <br>
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>County Name</th>
-                <th>Population</th>
-                <th>Population_MOE</th>
-                <th>Uninsured</th>  
-                <th>Uninsured_MOE</th>
-                <th>Uninsured_Pct</th>
-                <th>Uninsured_Pct_MOE</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr  v-for="item in countiesList" v-if="countiesList.length>0">
-                <td>{{item.County}}</td>
-                <td>{{item.Population}}</td>
-                <td>{{item.Population_MOE}}</td>
-                <td>{{item.Uninsured}}</td>
-                <td>{{item.Uninsured_MOE}}</td>
-                <td>{{item.Uninsured_Pct}}%</td>
-                <td>{{item.Uninsured_Pct_MOE}}%</td>
-              </tr>
-              <tr v-if="countiesList.length==0">
+    <div class="row">
+      <div class="col-md-12">
+        <br>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>county id</th>
+              <th>name</th>
+              <th>email</th>
+              <th>user type</th>  
+            </tr>
+          </thead>
+          <tbody>
+            <tr  v-for="item in userList.users">
+              <td v-if="item.county_id">{{item.county_id}}</td>
+              <td v-if="item.county_id">{{item.name}}</td>
+              <td v-if="item.county_id">{{item.email}}</td>
+              <td v-if="item.county_id">{{item.user_type}}</td>
+              <!-- <td>{{item.Uninsured}}</td> -->
+              <!-- <td>{{item.Uninsured_MOE}}</td> -->
+              <!-- <td>{{item.Uninsured_Pct}}%</td> -->
+              <!-- <td>{{item.Uninsured_Pct_MOE}}%</td> -->
+            </tr>
+            <tr v-if="userList.users.length==0">
                 <td class="text-center" colspan="8">
                   No counties Found
                 </td>
               </tr>
-            </tbody>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -55,18 +50,20 @@ export default {
   data () {
     return {
       msg: 'Hello profile',
-      countiesList: {}
+      userList: {},
+      profile: JSON.parse(localStorage.getItem('profile'))
     }
   },
   created () {
-    this.getcountyList()
+    this.getUserList()
   },
   methods: {
-    getcountyList () {
-      this.$axios.get('http://localhost:8000/api/population')
+    getUserList () {
+     
+      this.$axios.get('http://localhost:8000/api/users')
       .then(response => {
-        this.countiesList = response.data.counties
-        this.createPagin(this.countiesList)
+        this.userList = response.data
+        // this.createPagin(this.countiesList)
       })
     },
   }

@@ -6,8 +6,9 @@
             <router-link class="navbar-brand" to="/"><img src="./assets/census.png" height="50px" alt=""></router-link>
           </div>
           <ul class="nav navbar-nav navbar-right">
-            <li><router-link to="/">Dashboard</router-link></li>
-            <li><router-link to="/county">Counties</router-link></li>
+            <li v-if="user==='admin'"><router-link to="/">Dashboard</router-link></li>
+            <li v-if="user==='admin'"><router-link to="/county">Counties</router-link></li>
+            <li v-if="user==='County'"><router-link :to="'/county/' + profile.county_id">My County</router-link></li>
             <li><router-link to="/profile">Profile</router-link></li>
             <li><a v-on:click="logout();$router.push('/login')">Logout</a></li>
           </ul>
@@ -28,7 +29,9 @@
 export default {
   data () {
     return {
-      loginStatus: false
+      loginStatus: false,
+      user: '',
+      profile: JSON.parse(localStorage.getItem('profile'))
     }
   },
   created () {
@@ -38,6 +41,7 @@ export default {
     checkLoginStatus () {
       if (localStorage.getItem('Token')) {
         this.loginStatus = true
+        this.user = this.profile.user_type
       }
     },
     changeStatus (value) {

@@ -336,27 +336,27 @@
         <tbody class="half">
           <tr>
             <td><b>Population</b></td>
-            <td><input type="text" v-model="payload.Population"></td>
+            <td><input type="text" v-model="payloads.Population"></td>
           </tr>
           <tr >
             <td><b>Population MOE</b></td>
-            <td><input type="text" v-model="payload.Population_MOE"></td>
+            <td><input type="text" v-model="payloads.Population_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured</b></td>
-            <td><input type="text" v-model="payload.Uninsured"></td>
+            <td><input type="text" v-model="payloads.Uninsured"></td>
           </tr>
           <tr>
             <td><b>Uninsured MOE</b></td>
-            <td><input type="text" v-model="payload.Uninsured_MOE"></td>
+            <td><input type="text" v-model="payloads.Uninsured_MOE"></td>
           </tr>
           <tr>
             <td><b>Uninsured PCT</b></td>
-            <td><input type="text" v-model="payload.Uninsured_Pct">%</td>
+            <td><input type="text" v-model="payloads.Uninsured_Pct">%</td>
           </tr>
           <tr>
             <td><b>Uninsured PCT MOE</b></td>
-            <td><input type="text" v-model="payload.Uninsured_Pct_MOE">%</td>
+            <td><input type="text" v-model="payloads.Uninsured_Pct_MOE">%</td>
           </tr>
         </tbody>
       </table>
@@ -563,7 +563,15 @@ export default {
       poverty: 0,
       active: 1,
       payload: {},
-      model_role: ''
+      model_role: '',
+      payloads: {
+        Population: '',
+        Population_MOE: '',
+        Uninsured: '',
+        Uninsured_MOE: '',
+        Uninsured_Pct: '',
+        Uninsured_Pct_MOE: ''
+      }
     }
   },
   created () {
@@ -593,12 +601,26 @@ export default {
     getActive (data) {
       this.payload = JSON.parse(JSON.stringify(this.county))
       this.model_role = data
+      if(data === 'population') {
+        this.payloads.Population = this.county.Population  
+        this.payloads.Population_MOE = this.county.Population_MOE  
+        this.payloads.Uninsured = this.county.Uninsured  
+        this.payloads.Uninsured_MOE = this.county.Uninsured_MOE  
+        this.payloads.Uninsured_Pct = this.county.Uninsured_Pct  
+        this.payloads.Uninsured_Pct_MOE = this.county.Uninsured_Pct_MOE  
+      }
     },
     getInactive(data) {
       this.model_role = ''
       var postData = {}
       postData.update_type = data
       if(data === 'population') {
+        postData.data = this.payload.county
+        this.$axios.put ('http://localhost:8000/api/population/' + this.id, this.payloads)
+        .then(res => {
+          console.log(res.data)
+          this.getCountyDetails()
+        })
       }
       if(data === 'age') {
         postData.data = this.payload.ages

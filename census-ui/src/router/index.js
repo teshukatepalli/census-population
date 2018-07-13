@@ -3,7 +3,6 @@ import Router from 'vue-router'
 import Login from '@/pages/login/login'
 import dashboard from '@/pages/dashboard/dashboard'
 import county from '@/pages/county/county'
-import editCounty from '@/pages/county/editCounty'
 import viewCounty from '@/pages/county/viewCounty'
 import profile from '@/pages/profile'
 import newCounty from '@/pages/county/newCounty'
@@ -43,11 +42,6 @@ export default new Router({
       name: 'viewCounty',
       component: viewCounty,
       props: true
-    },
-    {
-      path: '/editCounty',
-      name: 'editCounty',
-      component: editCounty
     },
     {
       path: '/profile',

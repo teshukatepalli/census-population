@@ -38,7 +38,7 @@ class PopulationRorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return population_ror::create($request->all());
     }
 
     /**

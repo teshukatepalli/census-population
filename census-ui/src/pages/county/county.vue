@@ -5,7 +5,7 @@
         <h3>Counties</h3>
       </div>
       <div class="col-md-6 text-right">
-        <!-- <button class="btn btn-primary" v-on:click="$router.push('/newCounty')">+ New County</button> -->
+        <button class="btn btn-primary" v-on:click="$router.push('/newCounty')">+ New County</button>
       </div>
     </div>
     <!-- countieslist -->
@@ -79,7 +79,7 @@ export default {
       msg: 'hello',
       countiesList: [],
       paginData: {
-        perPage: 5,
+        perPage: 10,
         total: 0,
         pages: 0,
         pageNum: 1
@@ -104,8 +104,8 @@ export default {
       .then(response => {
         this.msg = response.data.message
       alert(this.msg)
-      })
       this.getcountyList()
+      })
     },
     callCreatePagin (dalaList) {
 

@@ -47,6 +47,9 @@ export default {
   				if (res.data.profile.user_type === 'admin') {
   					window.location.href='/'
   				}
+          if (res.data.profile.user_type === 'County') {
+            window.location.href='/'
+          }
   			}
   		})
   	}
