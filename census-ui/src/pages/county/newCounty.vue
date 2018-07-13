@@ -4,7 +4,6 @@
       <div class="container-fluid bg-white">
         <div class="row flex-c">
           <div class="col-md-10">
-            {{newuser}}
             <div v-if="main" class="col-md-12" style="width: 100%;overflow-x: auto;">
               <br>
               <div class="welcome-board text-center">
@@ -67,7 +66,7 @@
                 <button class="btn btn-primary" v-on:click="addCounty()">Add</button>
               </div>
             </div>
-            <div v-if="ageform" class="model">
+            <div v-if="ageform" class="models">
               <div class="welcome-board text-center">
                 <h4>Add Age Details for {{this.countyData.County}}</h4>
               </div>
@@ -109,7 +108,7 @@
               <button class="btn btn-primary" v-on:click="addData('ages')">Add</button>
               <button class="btn btn-primary" v-on:click="changeForm('gender')">Later</button>
             </div>
-            <div v-if="genderform" class="model">
+            <div v-if="genderform" class="models">
               <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
                 <thead>
                   <tr>
@@ -148,7 +147,7 @@
               <button class="btn btn-primary" v-on:click="changeForm('races')">Later</button>
             </div>
             <br>
-            <div v-if="racesfrom" class="model ">
+            <div v-if="racesfrom" class="models">
               <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
                 <thead>
                   <tr>
@@ -187,7 +186,7 @@
               <button class="btn btn-primary" v-on:click="changeForm('income')">Later</button>
             </div>
             <br>
-            <div v-if="incomeform" class="model">
+            <div v-if="incomeform" class="models">
               <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
                 <thead>
                   <tr>
@@ -226,7 +225,7 @@
               <button class="btn btn-primary" v-on:click="changeForm('poverty')">Later</button>
             </div>
             <br>
-            <div v-if="povertyform" class="model">
+            <div v-if="povertyform" class="models">
               <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
                 <thead>
                   <tr>

@@ -599,6 +599,7 @@ export default {
       })
     },
     getActive (data) {
+      this.topFunction()
       this.payload = JSON.parse(JSON.stringify(this.county))
       this.model_role = data
       if(data === 'population') {
@@ -624,7 +625,7 @@ export default {
       }
       if(data === 'age') {
         postData.data = this.payload.ages
-        this.$axios.post(this.$api + '/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -632,7 +633,7 @@ export default {
       }
        if(data === 'gender') {
         postData.data = this.payload.genders
-        this.$axios.post(this.$api + '/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -640,7 +641,7 @@ export default {
       }
       if(data === 'roi') {
         postData.data = this.payload.household
-        this.$axios.post(this.$api + '/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -648,7 +649,7 @@ export default {
       }
       if(data === 'races') {
         postData.data = this.payload.rors
-        this.$axios.post(this.$api + '/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -656,15 +657,16 @@ export default {
       }
       if(data === 'poverty') {
         postData.data = this.payload.poverty
-        this.$axios.post(this.$api + '/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
         }) 
       }
-
-      // update the data
-
+    },
+    topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
     }
   }
 }
