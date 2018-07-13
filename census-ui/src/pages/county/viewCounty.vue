@@ -583,7 +583,7 @@ export default {
   },
   methods: {
     getCountyDetails () {
-      this.$axios.get('http://localhost:8000/api/population/' + this.id)
+      this.$axios.get(this.$api + '/api/population/' + this.id)
       .then(res => {
         if (res.data.success === true) {
           this.county = res.data.county
@@ -591,7 +591,7 @@ export default {
       })
     },
     putCountyDetails (data) {
-      this.$axios.put('http://localhost:8000/api/population/' + this.id,)
+      this.$axios.put(this.$api + '/api/population/' + this.id,)
       .then(res => {
         if (res.data.success === true) {
           this.msg = res.data
@@ -616,7 +616,7 @@ export default {
       postData.update_type = data
       if(data === 'population') {
         postData.data = this.payload.county
-        this.$axios.put ('http://localhost:8000/api/population/' + this.id, this.payloads)
+        this.$axios.put (this.$api + '/api/population/' + this.id, this.payloads)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -624,7 +624,7 @@ export default {
       }
       if(data === 'age') {
         postData.data = this.payload.ages
-        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall/', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -632,7 +632,7 @@ export default {
       }
        if(data === 'gender') {
         postData.data = this.payload.genders
-        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall/', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -640,7 +640,7 @@ export default {
       }
       if(data === 'roi') {
         postData.data = this.payload.household
-        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall/', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -648,7 +648,7 @@ export default {
       }
       if(data === 'races') {
         postData.data = this.payload.rors
-        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall/', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()
@@ -656,7 +656,7 @@ export default {
       }
       if(data === 'poverty') {
         postData.data = this.payload.poverty
-        this.$axios.post('http://localhost:8000/api/updateall/', postData)
+        this.$axios.post(this.$api + '/api/updateall/', postData)
         .then(res => {
           console.log(res.data)
           this.getCountyDetails()

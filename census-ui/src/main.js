@@ -17,6 +17,7 @@ axios.interceptors.request.use(
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+Vue.prototype.$api = 'http://censusapi.codejunkers.in'
 
 /* eslint-disable no-new */
 new Vue({

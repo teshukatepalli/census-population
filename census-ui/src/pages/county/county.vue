@@ -93,14 +93,14 @@ export default {
   },
   methods: {
     getcountyList () {
-      this.$axios.get('http://localhost:8000/api/population')
+      this.$axios.get(this.$api + '/api/population')
       .then(response => {
         this.countiesList = response.data.counties
         this.createPagin(this.countiesList)
       })
     },
     deleteCounty (id) {
-      this.$axios.delete('http://localhost:8000/api/population/'+ id)
+      this.$axios.delete(this.$api + '/api/population/'+ id)
       .then(response => {
         this.msg = response.data.message
       alert(this.msg)

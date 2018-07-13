@@ -137,19 +137,19 @@ export default {
   },
   methods: {
     getcountyList() {
-      this.$axios.get('http://localhost:8000/api/population')
+      this.$axios.get(this.$api + '/api/population')
       .then(response => {
         this.countiesList = response.data.counties
       })
     },
     getageList() {
-      this.$axios.get('http://localhost:8000/api/population_gender')
+      this.$axios.get(this.$api + '/api/population_gender')
       .then(response => {
         this.ageList = response.data.gender
       })
     },
     getDashboard() {
-      this.$axios.get('http://localhost:8000/api/dashboard')
+      this.$axios.get(this.$api + '/api/dashboard')
       .then(response => {
         this.dashboardData = response.data.data
       })

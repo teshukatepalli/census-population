@@ -38,7 +38,7 @@ export default {
   },
   methods: {
   	login() {
-  		this.$axios.post('http://localhost:8000/api/login', this.payload)
+  		this.$axios.post(this.$api + '/api/login', this.payload)
   		.then(res => {
   			if (res.data.success === true) {
   				localStorage.setItem('Token', res.data.token)

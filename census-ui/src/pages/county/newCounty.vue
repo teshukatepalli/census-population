@@ -4,6 +4,7 @@
       <div class="container-fluid bg-white">
         <div class="row flex-c">
           <div class="col-md-10">
+            {{newuser}}
             <div v-if="main" class="col-md-12" style="width: 100%;overflow-x: auto;">
               <br>
               <div class="welcome-board text-center">
@@ -106,7 +107,7 @@
                 </tbody>
               </table>
               <button class="btn btn-primary" v-on:click="addData('ages')">Add</button>
-              <button class="btn btn-primary" v-on:click="addData('gender')">Later</button>
+              <button class="btn btn-primary" v-on:click="changeForm('gender')">Later</button>
             </div>
             <div v-if="genderform" class="model">
               <table class="table table-bordered" style="width: 100%;overflow-x: auto;">
@@ -144,7 +145,7 @@
                 </tbody>
               </table>
               <button class="btn btn-primary" v-on:click="addData('gender')">Add</button>
-              <button class="btn btn-primary" v-on:click="addData('races')">Later</button>
+              <button class="btn btn-primary" v-on:click="changeForm('races')">Later</button>
             </div>
             <br>
             <div v-if="racesfrom" class="model ">
@@ -183,7 +184,7 @@
                 </tbody>
               </table>
               <button class="btn btn-primary" v-on:click="addData('races')">Done</button>
-              <button class="btn btn-primary" v-on:click="addData('income')">Later</button>
+              <button class="btn btn-primary" v-on:click="changeForm('income')">Later</button>
             </div>
             <br>
             <div v-if="incomeform" class="model">
@@ -222,7 +223,7 @@
                 </tbody>
               </table>
               <button class="btn btn-primary" v-on:click="addData('income')">Add</button>
-              <button class="btn btn-primary" v-on:click="addData('poverty')">Later</button>
+              <button class="btn btn-primary" v-on:click="changeForm('poverty')">Later</button>
             </div>
             <br>
             <div v-if="povertyform" class="model">
@@ -360,7 +361,7 @@ export default {
   methods: {
     addCounty () {
       // debugger;
-      this.$axios.post('http://localhost:8000/api/population',this.newcounty)
+      this.$axios.post(this.$api + '/api/population',this.newcounty)
       .then(response => {
         this.countyData = response.data
         console.log(this.data)
@@ -374,27 +375,49 @@ export default {
         this.newuser.email = this.countyData.County+'@gmail.com'
         this.addNewUser()
         alert('County Inserted')
-        this.addData('ages')
+        this.changeForm('ages')
 
       })
     },
     addNewUser () {
-      this.$axios.post('http://localhost:8000/api/newuser',this.newuser)
+      this.$axios.post(this.$api + '/api/newuser',this.newuser)
       .then(response => {
         this.userData = response.data
         console.log(this.userData)
         alert('user login details created Please check it on counties list')
       })
     },
-    addData (data) {
+    changeForm (data) {
       if(data === 'ages') {
         this.main = 0
         this.ageform = 1
-        this.$axios.post('http://localhost:8000/api/population_age',this.ages)
+      }
+      if(data === 'gender') {
+        this.ageform = 0
+        this.genderform = 1
+      }
+      if(data === 'races') {
+        this.genderform = 0
+        this.racesfrom = 1
+      }
+      if(data === 'income') {
+        this.racesfrom = 0
+        this.incomeform = 1
+      }
+      if(data === 'poverty') {
+        this.incomeform = 0
+        this.povertyform = 1
+      }
+    },
+    addData (data) {
+      if(data === 'ages') {
+        this.$axios.post(this.$api + '/api/population_age',this.ages)
         .then(response => {
           this.userData = response.data
+          this.main = 0
+          this.ageform = 1
+          alert('Age data Added')
           console.log(this.userData)
-          alert(this.userData)
           this.ages.age_from = null,
           this.ages.age_to = null,
           this.ages.Population = null,
@@ -406,13 +429,13 @@ export default {
         })
       }
       if(data === 'gender') {
-        this.ageform = 0
-        this.genderform = 1
-        this.$axios.post('http://localhost:8000/api/population_gender',this.gender)
+        this.$axios.post(this.$api + '/api/population_gender',this.gender)
         .then(response => {
           this.userData = response.data
+          this.ageform = 0
+          this.genderform = 1
+          alert('Gender Data Added')
           console.log(this.userData)
-          alert(this.userData)
           this.gender.gender = null,
           this.gender.Population = null,
           this.gender.Population_MOE = null,
@@ -423,13 +446,13 @@ export default {
         })
       }
       if(data === 'races') {
-        this.genderform = 0
-        this.racesfrom = 1
-        this.$axios.post('http://localhost:8000/api/population_race',this.races)
+        this.$axios.post(this.$api + '/api/population_race',this.races)
         .then(response => {
           this.userData = response.data
+          this.genderform = 0
+          this.racesfrom = 1
+          alert('Races Data Added')
           console.log(this.userData)
-          alert(this.userData)
           this.races.ror_label = null,
           this.races.Population = null,
           this.races.Population_MOE = null,
@@ -440,13 +463,13 @@ export default {
         })
       }
       if(data === 'income') {
-        this.racesfrom = 0
-        this.incomeform = 1
-        this.$axios.post('http://localhost:8000/api/population_household',this.hh)
+        this.$axios.post(this.$api + '/api/population_household',this.hh)
         .then(response => {
           this.userData = response.data
+          this.racesfrom = 0
+          this.incomeform = 1
+          alert('Ratio of Income Added')
           console.log(this.userData)
-          alert(this.userData)
           this.hh.income_from = null,
           this.hh.income_to = null,
           this.hh.Population = null,
@@ -458,13 +481,13 @@ export default {
         })
       }
       if(data === 'poverty') {
-        this.incomeform = 0
-        this.povertyform = 1
-        this.$axios.post('http://localhost:8000/api/population_poverty',this.poverty)
+        this.$axios.post(this.$api + '/api/population_poverty',this.poverty)
         .then(response => {
           this.userData = response.data
+          this.incomeform = 0
+          this.povertyform = 1
+          alert('Poverty')
           console.log(this.userData)
-          alert(this.userData)
           this.poverty.line_from = null
           this.poverty.line_to = null
           this.poverty.Population = null,

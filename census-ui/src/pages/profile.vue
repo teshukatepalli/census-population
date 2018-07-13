@@ -60,7 +60,7 @@ export default {
   methods: {
     getUserList () {
      
-      this.$axios.get('http://localhost:8000/api/users')
+      this.$axios.get(this.$api + '/api/users')
       .then(response => {
         this.userList = response.data
         // this.createPagin(this.countiesList)
