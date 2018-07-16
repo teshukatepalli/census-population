@@ -22,7 +22,7 @@ Install Latest Xampp Version on PHP >= 7.1.3
     https://getcomposer.org/Composer-Setup.exe
     install the Composer.exe
 
-#Download Laravel installer using Composer
+#install Laravel installer using Composer
     
     open Command Prompt and enter the command prompt
     composer global require "laravel/installer"
@@ -40,10 +40,10 @@ Install all the dependencies using composer
 
     composer install
 
-Create Database in sql
+Create Database in MySql
 
     Start Xampp 
-    Start Apache and MySql 
+    Start Apache and MySql in xampp
     Open MySql admin panel using Localhost/phpmyadmin
     Create Database with the name of census
     Create User account with (username:root password: (password field remains blank))
@@ -81,8 +81,18 @@ install Node js
 
 Switch to the repo folder
 
-        cd census-population
-        cd census-ui
+    cd census-population
+    cd census-ui
+
+Api url is set into the front end
+
+    open main.js in project in src folder
+    Vue.prototype.$api = 'http://censusapi.codejunkers.in'
+
+We can use live api url
+    
+    Vue.prototype.$api = 'http://censusapi.codejunkers.in'
+
 ``` bash
 # install dependencies
 npm install
@@ -90,6 +100,7 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+
 
 # build for production with minification
 npm run build
